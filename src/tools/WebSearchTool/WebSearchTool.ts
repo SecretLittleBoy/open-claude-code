@@ -2,7 +2,7 @@ import type {
   BetaContentBlock,
   BetaWebSearchTool20250305,
 } from '@anthropic-ai/sdk/resources/beta/messages/messages.mjs'
-import { getAPIProvider } from '../../utils/model/providers.js'
+import { getAPIProvider, isFirstPartyAnthropicBaseUrl } from '../../utils/model/providers.js'
 import type { PermissionResult } from '../../utils/permissions/PermissionResult.js'
 import { z } from 'zod/v4'
 import { getFeatureValue_CACHED_MAY_BE_STALE } from '../../services/analytics/growthbook.js'
@@ -169,9 +169,10 @@ export const WebSearchTool = buildTool({
     const provider = getAPIProvider()
     const model = getMainLoopModel()
 
-    // Enable for firstParty
+    // Enable for firstParty only when using actual Anthropic API
+    // Custom proxies via ANTHROPIC_BASE_URL don't support server-side web search
     if (provider === 'firstParty') {
-      return true
+      return isFirstPartyAnthropicBaseUrl()
     }
 
     // Enable for Vertex AI with supported models (Claude 4.0+)

@@ -178,10 +178,11 @@ export function getRuntimeMainLoopModel(params: {
 export function getDefaultMainLoopModelSetting(): ModelName | ModelAlias {
   // Ants default to defaultModel from flag config, or Opus 1M if not configured
   if (process.env.USER_TYPE === 'ant') {
-    return (
-      getAntModelOverrideConfig()?.defaultModel ??
-      getDefaultOpusModel() + '[1m]'
-    )
+    // return (
+    //   getAntModelOverrideConfig()?.defaultModel ??
+    //   getDefaultOpusModel() + '[1m]'
+    // )
+    return getDefaultSonnetModel()
   }
 
   // Max users get Opus as default

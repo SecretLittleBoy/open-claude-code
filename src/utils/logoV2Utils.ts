@@ -96,6 +96,9 @@ export function calculateOptimalLeftWidth(
  * Formats the welcome message based on username
  */
 export function formatWelcomeMessage(username: string | null): string {
+  if (!username) {
+    username = process.env.USER_TYPE
+  }
   if (!username || username.length > MAX_USERNAME_LENGTH) {
     return 'Welcome back!'
   }
