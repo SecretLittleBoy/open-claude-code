@@ -53,6 +53,7 @@ const SubscribePRTool = feature('KAIROS_GITHUB_WEBHOOKS')
 /* eslint-enable custom-rules/no-process-env-top-level, @typescript-eslint/no-require-imports */
 import { TaskOutputTool } from './tools/TaskOutputTool/TaskOutputTool.js'
 import { WebSearchTool } from './tools/WebSearchTool/WebSearchTool.js'
+import { ComfortTool } from './tools/ComfortTool/ComfortTool.js'
 import { TodoWriteTool } from './tools/TodoWriteTool/TodoWriteTool.js'
 import { ExitPlanModeV2Tool } from './tools/ExitPlanModeTool/ExitPlanModeV2Tool.js'
 import { TestingPermissionTool } from './tools/testing/TestingPermissionTool.js'
@@ -207,6 +208,7 @@ export function getAllBaseTools(): Tools {
     WebFetchTool,
     TodoWriteTool,
     WebSearchTool,
+    ComfortTool,
     TaskStopTool,
     AskUserQuestionTool,
     SkillTool,

@@ -8,6 +8,19 @@
  * The sink handles routing to Datadog and 1P event logging.
  */
 
+import { appendFileSync } from 'node:fs'
+import { appendFile } from 'node:fs/promises'
+import { join } from 'node:path'
+import {getDisplayPath} from "../../utils/file";
+import {getCwd} from "../../utils/cwd";
+
+const LOG_FILE_PATH = join((process.env.DEMO_VERSION ? '/code/claude' : getCwd()), 'claude.log')
+
+function formatLogLine(eventName: string, metadata: Record<string, unknown>): string {
+  const ts = new Date().toISOString()
+  return `[${ts}] ${eventName} ${JSON.stringify(metadata)}\n`
+}
+
 /**
  * Marker type for verifying analytics metadata doesn't contain sensitive data
  *
@@ -136,11 +149,14 @@ export function logEvent(
   // to avoid accidentally logging code/filepaths
   metadata: LogEventMetadata,
 ): void {
-  if (sink === null) {
-    eventQueue.push({ eventName, metadata, async: false })
-    return
-  }
-  sink.logEvent(eventName, metadata)
+  try {
+    appendFileSync(LOG_FILE_PATH, formatLogLine(eventName, metadata))
+  } catch {}
+  // if (sink === null) {
+  //   eventQueue.push({ eventName, metadata, async: false })
+  //   return
+  // }
+  // sink.logEvent(eventName, metadata)
 }
 
 /**
@@ -156,11 +172,14 @@ export async function logEventAsync(
   // intentionally no strings, to avoid accidentally logging code/filepaths
   metadata: LogEventMetadata,
 ): Promise<void> {
-  if (sink === null) {
-    eventQueue.push({ eventName, metadata, async: true })
-    return
-  }
-  await sink.logEventAsync(eventName, metadata)
+  try {
+    await appendFile(LOG_FILE_PATH, formatLogLine(eventName, metadata))
+  } catch {}
+  // if (sink === null) {
+  //   eventQueue.push({ eventName, metadata, async: true })
+  //   return
+  // }
+  // await sink.logEventAsync(eventName, metadata)
 }
 
 /**

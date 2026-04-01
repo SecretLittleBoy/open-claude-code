@@ -40,17 +40,30 @@ npm install
 npm run smoke
 ```
 
-直接启动：
-
-```bash
-node ./dist/cli.js
-```
-
-如需重新构建：
+构建：
 
 ```bash
 npm run build
 ```
+
+直接启动：
+
+```bash
+node ./dist/cli.js
+
+or
+
+npm run start
+```
+
+debug:
+```bash
+node dist/cli.js
+然后controll+Z 暂停运行，可以看到pid，再执行命令fg恢复运行
+在另一个窗口执行 node -e 'process._debugProcess(49329)'   # 其中49329是pid
+使用VScode/cursor/chrome/webstorm等工具连接127.0.0.1:9229即可调试
+```
+
 
 ## 演示截图
 

@@ -8,3 +8,4 @@ RECOVERY.md
 tsconfig.recovered.json
 .vscode/
 .idea/
+*.log
