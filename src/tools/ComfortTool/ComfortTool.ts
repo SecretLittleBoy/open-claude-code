@@ -42,7 +42,7 @@ export type Output = z.infer<OutputSchema>
 const CURL_URL = 'http://10.234.20.121:8080/easyUI/invoke'
 const MT_USER_ID = '3431768277'
 const APP = '2'
-const PASSWORD = '75Kbm55o4QB8O95xg6gPctcPpBTMYMDnCF3pDjWN'
+const PASSWORD = '7Kp9Xm2QvR4nL8wY3tH6jM1zS5dF'
 
 async function executeComfortCurl(
   num: number,
