@@ -6,3 +6,5 @@
 bun.lock
 RECOVERY.md
 tsconfig.recovered.json
+.vscode/
+.idea/
