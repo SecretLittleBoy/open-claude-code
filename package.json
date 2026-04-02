@@ -17,8 +17,8 @@
   },
   "scripts": {
     "build": "bun build src/entrypoints/cli.tsx --outdir ./dist --target node --sourcemap",
-    "start": "bun dist/cli.js",
-    "smoke": "node ./dist/cli.js --version"
+    "dev": "bun ./dist/cli.js",
+    "version": "bun ./dist/cli.js --version"
   },
   "dependencies": {
     "@alcalzone/ansi-tokenize": "^0.3.0",
@@ -63,6 +63,7 @@
     "ajv": "^8.18.0",
     "asciichart": "^1.5.25",
     "auto-bind": "^5.0.1",
+    "audio-capture-napi": "./stubs/audio-capture-napi",
     "axios": "^1.14.0",
     "bidi-js": "^1.0.3",
     "chalk": "^5.6.2",
@@ -82,6 +83,7 @@
     "highlight.js": "^11.11.1",
     "human-signals": "^8.0.1",
     "indent-string": "^5.0.0",
+    "image-processor-napi": "./stubs/image-processor-napi",
     "jsonc-parser": "^3.3.1",
     "lodash-es": "^4.17.23",
     "lru-cache": "^11.2.7",
