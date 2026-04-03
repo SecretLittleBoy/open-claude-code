@@ -1,10 +1,12 @@
 import { RECOVERY_MACRO } from '../recovery/macroShim.js';
 import { feature } from 'bun:bundle';
 
+// 防止 corepack 污染 package.json
 // Bugfix for corepack auto-pinning, which adds yarnpkg to peoples' package.jsons
 // eslint-disable-next-line custom-rules/no-top-level-side-effects
 process.env.COREPACK_ENABLE_AUTO_PIN = '0';
 
+// CCR 远程环境设置 8GB 堆上限
 // Set max heap size for child processes in CCR environments (containers have 16GB)
 // eslint-disable-next-line custom-rules/no-top-level-side-effects, custom-rules/no-process-env-top-level, custom-rules/safe-env-boolean-check
 if (process.env.CLAUDE_CODE_REMOTE === 'true') {
@@ -51,7 +53,7 @@ async function main(): Promise<void> {
   // Fast-path for --dump-system-prompt: output the rendered system prompt and exit.
   // Used by prompt sensitivity evals to extract the system prompt at a specific commit.
   // Ant-only: eliminated from external builds via feature flag.
-  if (feature('DUMP_SYSTEM_PROMPT') && args[0] === '--dump-system-prompt') {
+  if (args[0] === '--dump-system-prompt') { // feature('DUMP_SYSTEM_PROMPT') &&
     profileCheckpoint('cli_dump_system_prompt_path');
     const {
       enableConfigs
